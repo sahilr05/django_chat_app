@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+Signup
+</title>
+{% endblock %}
+x
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Add User</li>
+{% endblock %}
+
+{% block body %}
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Add user</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button type="submit" class="btn btn-primary btn-block mt-2">Signup</button>
+          </form>
+        </div>
+      </div>
+      <div class="text-center py-2">
+        <small>
+          <a href="{% url 'accounts:login' %}" class="text">Already have an account? Login</a>
+        </small>
+      </div>
+    </div>
+  </div>
+{% endblock %}

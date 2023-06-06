@@ -1,0 +1,34 @@
+{% extends 'base_accounts.html' %}
+
+{% block head %}
+<title>Change Password</title>
+{% endblock head %}
+
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">My Account</li>
+<li class="breadcrumb-item text-primary">Change Password</li>
+{% endblock %}
+
+{% block sidenav %}
+  <a href="{% url 'accounts:my_account' %}" class="list-group-item list-group-item-action bg-light">Account Settings</a>
+  <a href="#" class=" text-dark list-group-item list-group-item-action bg-white">Change Password</a>
+{% endblock %}
+
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card">
+        <div class="card-body shadow-sm">
+          <h3 class="card-title">Change Password</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button type="submit" class="btn btn-primary btn-block mt-2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

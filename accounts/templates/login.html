@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Login to Site Checker</title>
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Login</li>
+{% endblock %}
+{% block body %}
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-6 col-sm-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Log in</h3>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ next }}">
+          <div class="form-group">
+            <label for="login_email_phone">Email or phone number:</label>
+            <input type="text" id="login_email_phone" name="email_or_phone" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="login_password">Password:</label>
+            <input type="password" id="login_password" name="password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </form>
+      </div>
+      <div class="card-footer text-muted text-center">
+      </div>
+    </div>
+    <div class="text-center py-2">
+      <small>
+        <a href="{% url 'accounts:signup' %}" class="text-muted">Signup</a>
+      </small>
+    </div>
+  </div>
+</div>
+{% endblock %}

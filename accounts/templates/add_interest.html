@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Interest List{%endblock %} {% block breadcrumb %}
+<li class="breadcrumb-item active">Interest List</li>
+{% endblock %} {% block body %}
+<div class="container mb-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-4">
+      <div class="card">
+        <div class="card-body shadow-sm">
+          <h3 class="card-title text-center">
+            <h4 class="card-title text-center">Add interest</h4>
+          </h3>
+          <form method="post" novalidate>
+            {% csrf_token %} 
+            <div class="jumbotron p-1">
+              <div class="mb-2">
+                Interest:
+                <select
+                  id="interestList"
+                  class="ml-2 selectpicker"
+                  name="interest_listxblocks"
+                  multiple
+                  data-live-search="true"
+                >
+                  {% for i in all_interest %}
+                  <option value="{{i.interest_id}}">{{i.name}}</option>
+                  {% endfor %}</select
+                ><br />
+                {% if flag %} {% if not user_interest_list %}
+                <br />No interest selected {% else %}
+                <table class="table col-4 mt-2 ml-2">
+                  <thead class="thead-inverse">
+                    <tr>
+                      <th class="justify-content-center">Index</th>
+                      <th class="justify-content-center">Interest</th>
+                      <th class="justify-content-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for user_interest in user_interest_list %}
+                    <tr>
+                      <td class="align-middle">{{forloop.counter}}</td>
+                      <td class="align-middle">{{user_interest.name}}</td>
+                      <td>
+                        <a
+                          href="{% url 'accounts:delete_interest' user_interest.pk %}"
+                        >
+                          <img
+                            src='{% static "images/delete.png" %}'
+                            width="20"
+                            height="20"
+                          />
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %} {% endif %}
+              </div>
+            </div>
+     
+              <button id="addButton" type="submit" class="btn btn-primary btn-block disabled">Add</button>
+            
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+      {% if flag %}
+      <a href="{% url 'chat_app:connect' %}" class="btn btn-outline-success btn-block mt-2">Proceed to chat</a>
+      {% else %}
+      <a href="{% url 'chat_app:connect' %}" class="btn btn-outline-danger btn-block mt-2" data-placement="bottom" data-toggle="tooltip" title="Proceed without interest">Proceed to chat</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
